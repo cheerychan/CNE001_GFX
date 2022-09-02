@@ -37,7 +37,7 @@ void main(void)
 	init_vic();
 	pmu_init();	
 		
-	init_pmp_timer(TIM_PERIOD);  //interrupt period ms
+	//init_pmp_timer(TIM_PERIOD);  //interrupt period ms
 
 	//patches();
 	//test_vector_init(); 
@@ -45,7 +45,8 @@ void main(void)
 	while (1)
 	{
 		c3d_reg_mode_test();
-		pcu_boost_reduce_test();
+		s3d0_reg_mode_test();
+		//pcu_boost_reduce_test();
 
 		//mdelay(1000);
 	}

@@ -95,6 +95,7 @@ int vpp_dvfs_reg(unsigned char dvfs_idx);
 void power_budget_boost(unsigned int power);
 
 void c3d_reg_mode_test(void);
+void s3d0_reg_mode_test(void);
 void pcu_boost_reduce_test(void);
 
 #endif

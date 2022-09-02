@@ -88,7 +88,7 @@ void pmu_init(void)
 	dvfs_table_init();
 	//enable dvfs
 	p_dvfs_en_and_avs_en->C3D_DVFS_EN.reg.c3d_dvfs_en=1;
-	p_dvfs_en_and_avs_en->S3D0_DVFS_EN.reg.s3d0_dvfs_en=0;
+	p_dvfs_en_and_avs_en->S3D0_DVFS_EN.reg.s3d0_dvfs_en=1;
 	p_dvfs_en_and_avs_en->S3D1_DVFS_EN.reg.s3d1_dvfs_en=0;
 	p_dvfs_en_and_avs_en->VPP_DVFS_EN.reg.vpp_dvfs_en=0;
     
@@ -137,8 +137,8 @@ void pmu_init(void)
 	p_int->PMP_IRQ_MASK_CTRL.reg.S3D1_DVFS_REG_INT=1;
 	p_int->PMP_IRQ_MASK_CTRL.reg.VPP_DVFS_REG_INT=1;
 
-	p_dvfs_reg_ctrl->C3D_DVFS_CFG.reg.max_dvfs_idx = 0xf;
-	p_dvfs_reg_ctrl->S3D0_DVFS_CFG.reg.max_dvfs_idx = 0xf;
+	p_dvfs_reg_ctrl->C3D_DVFS_CFG.reg.max_dvfs_idx = 0xa;
+	p_dvfs_reg_ctrl->S3D0_DVFS_CFG.reg.max_dvfs_idx = 0xa;
 	p_dvfs_reg_ctrl->S3D1_DVFS_CFG.reg.max_dvfs_idx = 0xf;
 	p_dvfs_reg_ctrl->VPP_DVFS_CFG.reg.max_dvfs_idx = 0xf;
 
@@ -146,7 +146,13 @@ void pmu_init(void)
 	p_dvfs_reg_ctrl->S3D0_DVFS_CFG.reg.min_dvfs_idx = 0;
 	p_dvfs_reg_ctrl->S3D1_DVFS_CFG.reg.min_dvfs_idx = 0;
 	p_dvfs_reg_ctrl->VPP_DVFS_CFG.reg.min_dvfs_idx = 0;
-
+    /*
+	p_dvfs_reg_ctrl->VOL_CLAMP.uint = 0x1;
+	p_dvfs_reg_ctrl->C3D_DVFS_REG_CTRL.uint = 0x2;
+	p_dvfs_reg_ctrl->S3D0_DVFS_REG_CTRL.uint = 0x3;
+	p_dvfs_reg_ctrl->S3D1_DVFS_REG_CTRL.uint = 0x4;
+    p_dvfs_reg_ctrl->VPP_DVFS_REG_CTRL.uint = 0x5;
+    */
 
 
 	//enable ts register
@@ -557,7 +563,20 @@ void c3d_reg_mode_test(void)
 	
 	if(c3d_dvfs_reg(reg_idx)==0)
 			reg_idx++;
-	if(reg_idx >= 16)
+	if(reg_idx >= 11)
+	{
+		reg_idx=0;
+	}
+}
+
+//c3d0 reg mode test
+void s3d0_reg_mode_test(void)
+{
+	static unsigned char reg_idx=0;
+	
+	if(s3d0_dvfs_reg(reg_idx)==0)
+			reg_idx++;
+	if(reg_idx >= 11)
 	{
 		reg_idx=0;
 	}

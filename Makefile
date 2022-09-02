@@ -1,6 +1,6 @@
-PMP_VERSION ?= "_v2"
+PMP_VERSION ?= "_v3"
 TIME := $(shell env LANG=en_US date +"%F_%H-%M-%S")
-GFX="gfx_"
+GFX="ggfx_"
 
 # Set to 0 to keep the bin size as it is
 #make BIN_SIZE_BYTE=16*1024
